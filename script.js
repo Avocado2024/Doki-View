@@ -1,34 +1,52 @@
-function createImgElement(images, chapter) {
+function createImages(images, chapter, container) {
   if (images.length === 0) {
-    return `<p style="text-align: center;">Something went wrong</p>`;
+    const messageEl = document.createElement("p");
+    messageEl.textContent = "No images found";
+    messageEl.style.textAlign = "center";
+    container.appendChild(messageEl);
+    return;
   }
 
-  const result = images.map(
-    (img, i) => `<img src="${img}" alt="Ch${chapter} P${i + 1}" loading="lazy">`
-  );
-
-  return result.join("\n");
+  images.forEach((imgData, index) => {
+    const imageEl = document.createElement("img");
+    imageEl.src = imgData;
+    imageEl.alt = `Chapter${chapter} Page${index + 1}`;
+    imageEl.loading = "lazy";
+    container.appendChild(imageEl);
+  });
 }
 
-function updateWebPage(data) {
-  // Check if the user prefers dark mode
-  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  document.body.classList.toggle("dark-mode", isDark);
+// page skeleton
+document.body.innerHTML = `
+  <header>
+    <p class="title"></p>
+  </header>
 
-  // Update the title with manga name and chapter
-  const title = document.querySelector(".title");
-  title.textContent = `${data.name} - Chapter ${data.chapter}`;
+  <main>
+    <div class="img-container"></div>
+    <div class="credits"></div>
+  </main>
 
-  // Insert images into the container
-  const imgElements = createImgElement(data.images, data.chapter);
-  document.querySelector(".img-container").innerHTML = imgElements;
+  <footer>
+    Scanlation by
+    <a href="https://t.me/Doki_Translation" target="_blank">Doki Translation</a>
+  </footer>
+`;
 
-  // Show team credits
-  document.querySelector(".our-team").innerHTML = `
-    <p>Translator: ${data.team.translator}</p>
-    <p>Editor: ${data.team.editor}</p>
-    <p>Quality Checker: ${data.team.qualityChecker}</p>
-  `;
-}
+// set dark mode if user prefers it
+const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+document.body.classList.toggle("dark-mode", isDark);
 
-updateWebPage(mangaData);
+const titleEl = document.querySelector(".title");
+const imgContainer = document.querySelector(".img-container");
+const creditsEl = document.querySelector(".credits");
+
+const creditsHTML = `
+  <p>Translator: ${data.team.translator}</p>
+  <p>Editor: ${data.team.editor}</p>
+  <p>Quality Checker: ${data.team.qualityChecker}</p>
+`;
+
+titleEl.textContent = `${data.name} - Chapter ${data.chapter}`;
+createImages(data.images, data.chapter, imgContainer);
+creditsEl.innerHTML = creditsHTML;

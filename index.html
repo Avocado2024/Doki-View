@@ -3,39 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .notice {
+        width: 100%;
+        height: 100dvh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: sans-serif;
+      }
+    </style>
+
     <title>Doki View</title>
   </head>
   <body>
-    <header>
-      <p class="title"></p>
-    </header>
-
-    <main>
-      <div class="img-container"></div>
-      <div class="our-team"></div>
-    </main>
-
-    <footer>
-      Scanlation by
-      <a href="https://t.me/Doki_Translation" target="_blank">
-        Doki Translation
-      </a>
-    </footer>
-
     <script>
-      const mangaData = {
+      const data = {
         name: "Manga Name",
         chapter: 0,
-        team: {
-          translator: "name",
-          editor: "name",
-          qualityChecker: "name",
-        },
+        team: { translator: "name", editor: "name", qualityChecker: "name" },
         images: [],
       };
-    </script>
 
-    <script src="script.js"></script>
+      const notice = document.createElement("p");
+      notice.classList.add("notice");
+      notice.textContent = "Please wait…";
+      document.body.appendChild(notice);
+
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "style.css"; // Replace with your CSS URL
+      document.head.appendChild(link);
+
+      const script = document.createElement("script");
+      script.src = "script.js"; // Replace with your script URL
+      document.body.appendChild(script);
+    </script>
   </body>
 </html>

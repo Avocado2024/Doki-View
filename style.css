@@ -55,7 +55,7 @@ main {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.our-team {
+.credits {
   display: grid;
   grid-template-columns: repeat(3, auto);
   text-align: center;
@@ -65,7 +65,7 @@ main {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.our-team p {
+.credits p {
   line-height: 1.6;
 }
 
@@ -94,7 +94,7 @@ footer a:hover {
   header .title {
     font-size: 1.25rem;
   }
-  .our-team {
+  .credits {
     grid-template-columns: repeat(1, auto);
     text-align: left;
   }
@@ -112,7 +112,7 @@ footer a:hover {
     color: #f5f5f5;
   }
 
-  .our-team {
+  .credits {
     background-color: #1a1d23;
     color: #d8dee9;
     box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
