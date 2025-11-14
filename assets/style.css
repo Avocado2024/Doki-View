@@ -1,0 +1,162 @@
+:root {
+  /* ===== Backgrounds ===== */
+  --color-base-bg: #eef0fc;
+  --color-card-bg: #ffffff;
+
+  /* ===== Text ===== */
+  --color-text-dark: #27284a;
+  --color-text-muted: #6e6fae;
+
+  /* ===== Accent Colors ===== */
+  --color-accent-primary: #7c5fff;
+  --color-accent-hover: #6a4bff;
+  --color-accent-active: #5936ff;
+
+  /* ===== Shadows & Rounded Corners ===== */
+  --shadow-card: 0 4px 12px rgba(92, 76, 255, 0.08);
+  --radius-md: 8px;
+
+  /* ===== Background Gradient ===== */
+  --bg-gradient: linear-gradient(135deg, #f3f0ff 0%, #ebe7ff 40%, #e5e2ff 70%, #f6f4ff 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 800px;
+  justify-content: center;
+  padding: 20px;
+  color: var(--color-text-dark);
+
+  /* Gradient with color fallback */
+  background-color: var(--color-base-bg);
+  background-image: var(--bg-gradient);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* ===== Main Container ===== */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px; /* main spacing between sections */
+}
+
+/* ===== Header Start ===== */
+
+header {
+  padding: 20px;
+  text-align: center;
+  background-color: var(--color-card-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+header .title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* ===== Main Start ===== */
+
+main {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px; /* spacing inside main */
+}
+
+/* Image Container section */
+
+main .img-container {
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  row-gap: 10px; /* spacing between images */
+}
+
+main .img-container img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+main .img-container img.blocked {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Credits section */
+
+main .credits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 20px;
+  text-align: center;
+  background-color: var(--color-card-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+main .credits p {
+  font-weight: 500;
+}
+
+/* ===== Footer Start ========*/
+
+footer {
+  padding: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+footer a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Responsive / Mobile Styles ===== */
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    grid-template-columns: 1fr;
+  }
+
+  header .title {
+    font-size: 1.25rem;
+  }
+
+  main .credits {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 4px;
+    text-align: left;
+  }
+
+  main .credits p {
+    font-size: 1rem;
+  }
+
+  .container {
+    row-gap: 16px; /* main spacing between sections */
+  }
+
+  .container main {
+    row-gap: 12px; /* spacing inside main */
+  }
+
+  .container main .img-container {
+    row-gap: 6px; /* spacing between images */
+  }
+}

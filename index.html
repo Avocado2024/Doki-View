@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css" />
 
     <style>
       * {
@@ -10,43 +11,22 @@
         padding: 0;
         box-sizing: border-box;
       }
-
-      .notice {
-        width: 100%;
-        height: 100dvh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-        font-weight: bold;
-        font-family: sans-serif;
-      }
     </style>
 
-    <title>Doki View</title>
+    <title>Manga Name & Chapter</title>
   </head>
   <body>
+    <p style="width: 100%; height: 100dvh; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; font-weight: bold; font-family: sans-serif">Please wait…</p>
+
     <script>
       const data = {
         name: "Manga Name",
         chapter: 0,
         team: { translator: "name", editor: "name", qualityChecker: "name" },
-        images: [],
+        images: ["./img/17.jpg", "./img/18.jpg"],
       };
-
-      const notice = document.createElement("p");
-      notice.classList.add("notice");
-      notice.textContent = "Please wait…";
-      document.body.appendChild(notice);
-
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = "style.css"; // Replace with your CSS URL
-      document.head.appendChild(link);
-
-      const script = document.createElement("script");
-      script.src = "script.js"; // Replace with your script URL
-      document.body.appendChild(script);
     </script>
+
+    <script src="assets/main.js"></script>
   </body>
 </html>
