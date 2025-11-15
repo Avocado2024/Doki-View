@@ -1,23 +1,29 @@
 :root {
-  /* ===== Backgrounds ===== */
+  /* Light theme default */
   --color-base-bg: #eef0fc;
   --color-card-bg: #ffffff;
-
-  /* ===== Text ===== */
   --color-text-dark: #27284a;
   --color-text-muted: #6e6fae;
-
-  /* ===== Accent Colors ===== */
   --color-accent-primary: #7c5fff;
   --color-accent-hover: #6a4bff;
   --color-accent-active: #5936ff;
-
-  /* ===== Shadows & Rounded Corners ===== */
   --shadow-card: 0 4px 12px rgba(92, 76, 255, 0.08);
   --radius-md: 8px;
-
-  /* ===== Background Gradient ===== */
   --bg-gradient: linear-gradient(135deg, #f3f0ff 0%, #ebe7ff 40%, #e5e2ff 70%, #f6f4ff 100%);
+}
+
+[data-theme="dark"] {
+  /* Dark theme */
+  --color-base-bg: #1e1e2f;
+  --color-card-bg: #2a2a3d;
+  --color-text-dark: #e0e0ff;
+  --color-text-muted: #a0a0c0;
+  --color-accent-primary: #7c5fff;
+  --color-accent-hover: #6a4bff;
+  --color-accent-active: #5936ff;
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --radius-md: 8px;
+  --bg-gradient: linear-gradient(135deg, #1e1e2f 0%, #23233d 40%, #292946 70%, #1e1e2f 100%);
 }
 
 * {
