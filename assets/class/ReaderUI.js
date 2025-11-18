@@ -36,7 +36,7 @@ export class ReaderUI {
 
   setCredits(members) {
     members.forEach((member) => {
-      this.creditsEl.innerHTML += `<p>${member.name}: ${member.role}</p>`;
+      this.creditsEl.innerHTML += `<p>${member.role}: ${member.name}</p>`;
     });
   }
 
