@@ -36,20 +36,29 @@ export class ReaderUI {
 
   setCredits(members) {
     members.forEach((member) => {
-      this.creditsEl.innerHTML += `<p>${member.role}: ${member.name}</p>`;
+      const memberEl = document.createElement("p");
+      memberEl.textContent = `${member.role}: ${member.name}`;
+      this.creditsEl.appendChild(memberEl);
     });
   }
 
   renderImages(imageUrls) {
     if (imageUrls.length === 0) {
-      this.imgContainer.innerHTML = `<p style="text-align: center;">No images found</p>`;
+      const imageNotFoundEl = document.createElement("p");
+      imageNotFoundEl.style.textAlign = "center";
+      imageNotFoundEl.textContent = "No images found";
+      this.imgContainer.appendChild(imageNotFoundEl);
       return;
     }
 
     imageUrls.forEach((imageUrl, i) => {
-      this.imgContainer.innerHTML += `
-        <img class="blocked" src="${imageUrl}" alt="Page${i + 1}" loading="lazy" draggable="false">
-      `;
+      const imageEl = document.createElement("img");
+      imageEl.classList.add("blocked");
+      imageEl.src = imageUrl;
+      imageEl.alt = `Page${i + 1}`;
+      imageEl.loading = "lazy";
+      imageEl.draggable = false;
+      this.imgContainer.appendChild(imageEl);
     });
   }
 }
