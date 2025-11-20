@@ -1,9 +1,11 @@
 import { ThemeManager } from "./class/ThemeManager.js";
 import { ReaderUI } from "./class/ReaderUI.js";
 
-const themeManager = new ThemeManager(); // Auto apply theme
-const readerUI = new ReaderUI();
+const pageInfo = window.pageInfo; // Get manga page info
 
-readerUI.setTitle(window.pageInfo.name, window.pageInfo.chapter);
-readerUI.setCredits(window.pageInfo.members);
-readerUI.renderImages(window.pageInfo.imageUrls);
+const themeManager = new ThemeManager(); // Apply theme
+const readerUI = new ReaderUI(); // Init reader
+
+readerUI.setTitle(pageInfo.name, pageInfo.chapter);
+readerUI.setCredits(pageInfo.members);
+readerUI.startLazyLoading(pageInfo.imageUrls, 3, 1); // Lazy load images
