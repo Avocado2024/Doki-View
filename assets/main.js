@@ -8,4 +8,4 @@ const readerUI = new ReaderUI(); // Init reader
 
 readerUI.setTitle(pageInfo.name, pageInfo.chapter);
 readerUI.setCredits(pageInfo.members);
-readerUI.startLazyLoading(pageInfo.imageUrls, 3, 1); // Lazy load images
+readerUI.startLazyLoading(pageInfo.imageUrls, 3, 2); // Lazy load images
