@@ -1,8 +1,10 @@
 export class ReaderUI {
   constructor(root = document.body) {
     this.root = root;
-    this.loadedImage = 0;
     this.initLayout();
+
+    this.loadedImage = 0;
+    this.observer = null;
   }
 
   initLayout() {
@@ -45,7 +47,6 @@ export class ReaderUI {
 
   createImageElement(src, alt, container) {
     const imageEl = document.createElement("img");
-    imageEl.classList.add("blocked");
     imageEl.src = src;
     imageEl.alt = alt;
     imageEl.loading = "lazy";
@@ -54,15 +55,6 @@ export class ReaderUI {
   }
 
   loadNextBatch(imageUrls, batchSize) {
-    if (imageUrls.length === 0) {
-      const imageNotFoundEl = document.createElement("p");
-      imageNotFoundEl.style.textAlign = "center";
-      imageNotFoundEl.textContent = "No images found";
-      this.imgContainer.innerHTML = "";
-      this.imgContainer.appendChild(imageNotFoundEl);
-      return;
-    }
-
     for (let i = 0; i < batchSize; i++) {
       if (this.loadedImage >= imageUrls.length) break;
 
@@ -74,27 +66,34 @@ export class ReaderUI {
   }
 
   observeLastImage(imageUrls, batchSize) {
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting) return; // Not visible yet, do nothing
+        this.observer.unobserve(entries[0].target); // Stop observing this image
+
+        if (this.loadedImage >= imageUrls.length) {
+          console.log(`All pages loaded! Total pages: ${this.loadedImage}`);
+          return; // All images loaded
+        }
+
+        this.loadNextBatch(imageUrls, batchSize); // Load next set of images
+        this.observeLastImage(imageUrls, batchSize); // Observe the new last image
+      },
+      { threshold: 0, rootMargin: "0px 0px 700px 0px" }
+    );
+
     const lastImageElement = this.imgContainer.lastElementChild;
-    if (!lastImageElement) return;
+    if (!lastImageElement) return; // Nothing to observe yet
 
-    const onChange = (entries, obs) => {
-      if (!entries[0].isIntersecting) return;
-      obs.unobserve(entries[0].target);
-
-      if (this.loadedImage >= imageUrls.length) {
-        console.log(`All pages loaded! Total pages: ${this.loadedImage}`);
-        return;
-      }
-
-      this.loadNextBatch(imageUrls, batchSize); // Load next batch
-      this.observeLastImage(imageUrls, batchSize); // Observe new last image
-    };
-
-    const observer = new IntersectionObserver(onChange, { rootMargin: "0px 0px 700px 0px" });
-    observer.observe(lastImageElement);
+    this.observer.observe(lastImageElement); // Start observing
   }
 
   startLazyLoading(imageUrls, startCount, batchSize) {
+    if (imageUrls.length === 0) {
+      this.imgContainer.innerHTML = "<p style='text-align:center'>No images found</p>";
+      return;
+    }
+
     this.loadNextBatch(imageUrls, startCount); // Preload initial images
     this.observeLastImage(imageUrls, batchSize); // Activate lazy load
   }
