@@ -88,11 +88,18 @@ main .img-container {
 main .img-container img {
   width: 100%;
   height: auto;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
+  aspect-ratio: 2 / 3; /* Default portrait ratio */
   display: block;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
+}
+
+main .img-container img.landscape {
+  aspect-ratio: 3 / 2;
+}
+
+main .img-container img.portrait {
+  aspect-ratio: 2 / 3;
 }
 
 main .img-container img.blocked {

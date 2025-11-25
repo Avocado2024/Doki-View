@@ -45,10 +45,15 @@ export class ReaderUI {
     });
   }
 
-  createImageElement(src, alt, container) {
+  createImageElement(container, options = {}) {
     const imageEl = document.createElement("img");
-    imageEl.src = src;
-    imageEl.alt = alt;
+    imageEl.alt = options.alt;
+    imageEl.src = options.src;
+
+    // Set class based on aspect ratio: landscape if width > height, otherwise portrait
+    const ratio = imageEl.width > imageEl.height ? "landscape" : "portrait";
+    imageEl.classList = `${ratio} blocked`;
+
     imageEl.loading = "lazy";
     imageEl.draggable = false;
     container.appendChild(imageEl);
@@ -58,9 +63,12 @@ export class ReaderUI {
     for (let i = 0; i < batchSize; i++) {
       if (this.loadedImage >= imageUrls.length) break;
 
-      const imageUrl = imageUrls[this.loadedImage];
-      const imageAlt = `Page ${this.loadedImage + 1}`;
-      this.createImageElement(imageUrl, imageAlt, this.imgContainer);
+      const options = {
+        src: imageUrls[this.loadedImage],
+        alt: `Page ${this.loadedImage + 1}`,
+      };
+
+      this.createImageElement(this.imgContainer, options);
       this.loadedImage++; // Update count
     }
   }
