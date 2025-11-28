@@ -24,7 +24,7 @@ export class AutoPageLoader {
   loadBatch(imageUrls, batchSize) {
     for (let i = 0; i < batchSize; i++) {
       if (this.loadedCount >= imageUrls.length) break;
-      this.appendImage(imageUrls[this.loadedCount], `Page ${this.loadedCount + 1}`, this.container);
+      this.appendImage(`Page ${this.loadedCount + 1}`, imageUrls[this.loadedCount], this.container);
       this.loadedCount++;
     }
 
