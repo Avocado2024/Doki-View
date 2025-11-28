@@ -1,11 +1,18 @@
+import { Layout } from "./class/Layout.js";
 import { ThemeManager } from "./class/ThemeManager.js";
-import { ReaderUI } from "./class/ReaderUI.js";
+import { AutoPageLoader } from "./class/AutoPageLoader.js";
 
-const pageInfo = window.pageInfo; // Get manga page info
+// Manga page data from HTML
+const pageInfo = window.pageInfo;
 
-const themeManager = new ThemeManager(); // Apply theme
-const readerUI = new ReaderUI(); // Init reader
+// Initialize theme and layout
+const themeManager = new ThemeManager();
+const layout = new Layout(document.body);
 
-readerUI.setTitle(pageInfo.name, pageInfo.chapter);
-readerUI.setCredits(pageInfo.members);
-readerUI.startLazyLoading(pageInfo.imageUrls, 3, 2); // Lazy load images
+// Set page title and credits
+layout.setTitle(pageInfo.name, pageInfo.chapter);
+layout.setCredits(pageInfo.members);
+
+// Initialize and start automatic page loader
+const autoPageLoader = new AutoPageLoader(layout.ui.imgContainer);
+autoPageLoader.start(pageInfo.imageUrls, 3, 3); // start with 3 images, load 3 per batch

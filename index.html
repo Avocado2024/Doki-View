@@ -3,16 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/style.css" />
     <title>Page Title</title>
   </head>
   <body>
-    <div
-      style="width: 100%; height: calc(100vh - 8vh); display: grid; place-content: center; font: 600 1.5rem sans-serif"
-    >
-      Please wait…
-    </div>
-
     <script>
       window.pageInfo = {
         name: "Manga Name",
@@ -22,10 +15,18 @@
           { name: "Name", role: "Role" },
           { name: "Name", role: "Role" },
         ],
-        imageUrls: ["./assets/img/image.jpg", "./assets/img/image.jpg"],
+        imageUrls: ["./assets/img/portrait.jpg", "./assets/img/landscape.jpg"],
       };
-    </script>
 
-    <script type="module" src="assets/main.js"></script>
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "assets/style.css";
+      document.head.appendChild(link);
+
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = "assets/main.js";
+      document.body.appendChild(script);
+    </script>
   </body>
 </html>
