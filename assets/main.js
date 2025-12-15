@@ -1,18 +1,36 @@
-import { Layout } from "./class/Layout.js";
-import { ThemeManager } from "./class/ThemeManager.js";
-import { AutoPageLoader } from "./class/AutoPageLoader.js";
+import { createHeader } from "./ui/header.js";
+import { createImagesWrapper } from "./ui/images.js";
+import { createFooter } from "./ui/footer.js";
+import { ImageLoader } from "./models/ImageLoader.js";
 
-// Manga page data from HTML
-const pageInfo = window.pageInfo;
+// == THEME COLORS ===
+// Primary   #2B2D42
+// Secondary #8D99AE
+// Accent    #EDF2F4
+// ===================
 
-// Initialize theme and layout
-const themeManager = new ThemeManager();
-const layout = new Layout(document.body);
+function initializeMangaPage(data) {
+  // ==== Setup TailwindCSS ====
+  const script = document.createElement("script");
+  script.src = "https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4";
+  script.defer = true;
+  document.head.appendChild(script);
 
-// Set page title and credits
-layout.setTitle(pageInfo.name, pageInfo.chapter);
-layout.setCredits(pageInfo.members);
+  // ==== Create Main Content Area ====
+  const contentArea = document.createElement("main");
+  contentArea.className = `grid grid-rows-[auto_1fr_auto] gap-4 min-h-screen bg-[#2B2D42]`;
+  document.body.appendChild(contentArea);
 
-// Initialize and start automatic page loader
-const autoPageLoader = new AutoPageLoader(layout.ui.imgContainer);
-autoPageLoader.start(pageInfo.imageUrls, 3, 3); // start with 3 images, load 3 per batch
+  // ==== Create UI Components ====
+  const header = createHeader({ name: data.name, chapter: data.chapter });
+  const imagesWrapper = createImagesWrapper();
+  const footer = createFooter(data.members);
+
+  contentArea.append(header, imagesWrapper, footer);
+
+  // ==== Initialize Image Loader ====
+  const imageLoader = new ImageLoader(imagesWrapper, data.imageUrls);
+  imageLoader.initializeImageLoading();
+}
+
+initializeMangaPage(window.pageInfo);

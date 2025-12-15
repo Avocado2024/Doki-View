@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://avocado2024.github.io/Doki-View/assets/styl.css" />
     <title>Page Title</title>
   </head>
   <body>
@@ -15,18 +16,14 @@
           { name: "Name", role: "Role" },
           { name: "Name", role: "Role" },
         ],
-        imageUrls: ["./assets/img/portrait.jpg", "./assets/img/landscape.jpg"],
+        imageUrls: [
+          "https://i.pinimg.com/1200x/dd/bf/0a/ddbf0a7b4312f0f4af12561bf865ec58.jpg",
+          "https://i.pinimg.com/1200x/2b/58/bf/2b58bff69efdba41a829973edcac9b10.jpg",
+          "https://i.pinimg.com/1200x/6d/63/7e/6d637e12b527edb3fd4d0178d347f467.jpg",
+        ],
       };
-
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = "assets/style.css";
-      document.head.appendChild(link);
-
-      const script = document.createElement("script");
-      script.type = "module";
-      script.src = "assets/main.js";
-      document.body.appendChild(script);
     </script>
+
+    <script type="module" src="assets/main.js"></script>
   </body>
 </html>
